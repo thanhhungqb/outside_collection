@@ -34,7 +34,7 @@ class ResidualBlock(nn.Module):
 
 
 class GeneratorResNet(nn.Module):
-    def __init__(self, in_channels=3, out_channels=3, n_residual_blocks=16):
+    def __init__(self, in_channels=3, out_channels=3, n_residual_blocks=16, upscale_factor=2):
         super(GeneratorResNet, self).__init__()
 
         # First layer
@@ -51,7 +51,7 @@ class GeneratorResNet(nn.Module):
 
         # Upsampling layers
         upsampling = []
-        for out_features in range(2):
+        for out_features in range(upscale_factor):
             upsampling += [
                 # nn.Upsample(scale_factor=2),
                 nn.Conv2d(64, 256, 3, 1, 1),
