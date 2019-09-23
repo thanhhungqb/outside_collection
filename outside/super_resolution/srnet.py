@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 import torch.nn.init as init
 
@@ -30,3 +31,15 @@ class SRNet(nn.Module):
         init.orthogonal_(self.conv2.weight, init.calculate_gain('relu'))
         init.orthogonal_(self.conv3.weight, init.calculate_gain('relu'))
         init.orthogonal_(self.conv4.weight)
+
+
+class SRNet3(SRNet):
+    def __init__(self, upscale_factor):
+        super(SRNet3, self).__init__(upscale_factor)
+
+    def forward(self, x):
+        o01 = super().forward(x[:, :1, :, :])
+        o02 = super().forward(x[:, 1:2, :, :])
+        o03 = super().forward(x[:, 2:, :, :])
+        o1 = torch.cat([o01, o02, o03], dim=1)
+        return o1
