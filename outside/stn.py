@@ -40,7 +40,7 @@ class STN(nn.Module):
         theta = self.fc_loc(xs)
         theta = theta.view(-1, 2, 3)
 
-        grid = F.affine_grid(theta, x.size())
+        grid = F.affine_grid(theta, x.size(), align_corners=True)
         x = F.grid_sample(x, grid)
 
         return x
