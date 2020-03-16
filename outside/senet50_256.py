@@ -1,4 +1,8 @@
-
+"""
+This source code is from `https://github.com/ox-vgg/vgg_face2`.
+It includes source code (below) and model weights (save outside).
+Trained on VGG-Face2
+"""
 import torch
 import torch.nn as nn
 
@@ -21,7 +25,8 @@ class Senet50_256(nn.Module):
         self.conv2_1_3x3_bn = nn.BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv2_1_3x3_relu = nn.ReLU(inplace=True)
         self.conv2_1_1x1_increase = nn.Conv2d(64, 256, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv2_1_1x1_increase_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv2_1_1x1_increase_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv2_1_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv2_1_1x1_down = nn.Conv2d(256, 16, kernel_size=[1, 1], stride=(1, 1))
         self.conv2_1_1x1_down_relu = nn.ReLU(inplace=True)
@@ -37,7 +42,8 @@ class Senet50_256(nn.Module):
         self.conv2_2_3x3_bn = nn.BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv2_2_3x3_relu = nn.ReLU(inplace=True)
         self.conv2_2_1x1_increase = nn.Conv2d(64, 256, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv2_2_1x1_increase_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv2_2_1x1_increase_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv2_2_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv2_2_1x1_down = nn.Conv2d(256, 16, kernel_size=[1, 1], stride=(1, 1))
         self.conv2_2_1x1_down_relu = nn.ReLU(inplace=True)
@@ -51,7 +57,8 @@ class Senet50_256(nn.Module):
         self.conv2_3_3x3_bn = nn.BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv2_3_3x3_relu = nn.ReLU(inplace=True)
         self.conv2_3_1x1_increase = nn.Conv2d(64, 256, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv2_3_1x1_increase_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv2_3_1x1_increase_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv2_3_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv2_3_1x1_down = nn.Conv2d(256, 16, kernel_size=[1, 1], stride=(1, 1))
         self.conv2_3_1x1_down_relu = nn.ReLU(inplace=True)
@@ -65,7 +72,8 @@ class Senet50_256(nn.Module):
         self.conv3_1_3x3_bn = nn.BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv3_1_3x3_relu = nn.ReLU(inplace=True)
         self.conv3_1_1x1_increase = nn.Conv2d(128, 512, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv3_1_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv3_1_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv3_1_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv3_1_1x1_down = nn.Conv2d(512, 32, kernel_size=[1, 1], stride=(1, 1))
         self.conv3_1_1x1_down_relu = nn.ReLU(inplace=True)
@@ -81,7 +89,8 @@ class Senet50_256(nn.Module):
         self.conv3_2_3x3_bn = nn.BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv3_2_3x3_relu = nn.ReLU(inplace=True)
         self.conv3_2_1x1_increase = nn.Conv2d(128, 512, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv3_2_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv3_2_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv3_2_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv3_2_1x1_down = nn.Conv2d(512, 32, kernel_size=[1, 1], stride=(1, 1))
         self.conv3_2_1x1_down_relu = nn.ReLU(inplace=True)
@@ -95,7 +104,8 @@ class Senet50_256(nn.Module):
         self.conv3_3_3x3_bn = nn.BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv3_3_3x3_relu = nn.ReLU(inplace=True)
         self.conv3_3_1x1_increase = nn.Conv2d(128, 512, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv3_3_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv3_3_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv3_3_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv3_3_1x1_down = nn.Conv2d(512, 32, kernel_size=[1, 1], stride=(1, 1))
         self.conv3_3_1x1_down_relu = nn.ReLU(inplace=True)
@@ -109,7 +119,8 @@ class Senet50_256(nn.Module):
         self.conv3_4_3x3_bn = nn.BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv3_4_3x3_relu = nn.ReLU(inplace=True)
         self.conv3_4_1x1_increase = nn.Conv2d(128, 512, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv3_4_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv3_4_1x1_increase_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv3_4_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv3_4_1x1_down = nn.Conv2d(512, 32, kernel_size=[1, 1], stride=(1, 1))
         self.conv3_4_1x1_down_relu = nn.ReLU(inplace=True)
@@ -123,7 +134,8 @@ class Senet50_256(nn.Module):
         self.conv4_1_3x3_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv4_1_3x3_relu = nn.ReLU(inplace=True)
         self.conv4_1_1x1_increase = nn.Conv2d(256, 1024, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv4_1_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv4_1_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv4_1_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv4_1_1x1_down = nn.Conv2d(1024, 64, kernel_size=[1, 1], stride=(1, 1))
         self.conv4_1_1x1_down_relu = nn.ReLU(inplace=True)
@@ -139,7 +151,8 @@ class Senet50_256(nn.Module):
         self.conv4_2_3x3_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv4_2_3x3_relu = nn.ReLU(inplace=True)
         self.conv4_2_1x1_increase = nn.Conv2d(256, 1024, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv4_2_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv4_2_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv4_2_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv4_2_1x1_down = nn.Conv2d(1024, 64, kernel_size=[1, 1], stride=(1, 1))
         self.conv4_2_1x1_down_relu = nn.ReLU(inplace=True)
@@ -153,7 +166,8 @@ class Senet50_256(nn.Module):
         self.conv4_3_3x3_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv4_3_3x3_relu = nn.ReLU(inplace=True)
         self.conv4_3_1x1_increase = nn.Conv2d(256, 1024, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv4_3_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv4_3_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv4_3_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv4_3_1x1_down = nn.Conv2d(1024, 64, kernel_size=[1, 1], stride=(1, 1))
         self.conv4_3_1x1_down_relu = nn.ReLU(inplace=True)
@@ -167,7 +181,8 @@ class Senet50_256(nn.Module):
         self.conv4_4_3x3_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv4_4_3x3_relu = nn.ReLU(inplace=True)
         self.conv4_4_1x1_increase = nn.Conv2d(256, 1024, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv4_4_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv4_4_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv4_4_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv4_4_1x1_down = nn.Conv2d(1024, 64, kernel_size=[1, 1], stride=(1, 1))
         self.conv4_4_1x1_down_relu = nn.ReLU(inplace=True)
@@ -181,7 +196,8 @@ class Senet50_256(nn.Module):
         self.conv4_5_3x3_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv4_5_3x3_relu = nn.ReLU(inplace=True)
         self.conv4_5_1x1_increase = nn.Conv2d(256, 1024, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv4_5_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv4_5_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv4_5_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv4_5_1x1_down = nn.Conv2d(1024, 64, kernel_size=[1, 1], stride=(1, 1))
         self.conv4_5_1x1_down_relu = nn.ReLU(inplace=True)
@@ -195,7 +211,8 @@ class Senet50_256(nn.Module):
         self.conv4_6_3x3_bn = nn.BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv4_6_3x3_relu = nn.ReLU(inplace=True)
         self.conv4_6_1x1_increase = nn.Conv2d(256, 1024, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv4_6_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv4_6_1x1_increase_bn = nn.BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv4_6_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv4_6_1x1_down = nn.Conv2d(1024, 64, kernel_size=[1, 1], stride=(1, 1))
         self.conv4_6_1x1_down_relu = nn.ReLU(inplace=True)
@@ -209,7 +226,8 @@ class Senet50_256(nn.Module):
         self.conv5_1_3x3_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv5_1_3x3_relu = nn.ReLU(inplace=True)
         self.conv5_1_1x1_increase = nn.Conv2d(512, 2048, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv5_1_1x1_increase_bn = nn.BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv5_1_1x1_increase_bn = nn.BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv5_1_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv5_1_1x1_down = nn.Conv2d(2048, 128, kernel_size=[1, 1], stride=(1, 1))
         self.conv5_1_1x1_down_relu = nn.ReLU(inplace=True)
@@ -225,7 +243,8 @@ class Senet50_256(nn.Module):
         self.conv5_2_3x3_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv5_2_3x3_relu = nn.ReLU(inplace=True)
         self.conv5_2_1x1_increase = nn.Conv2d(512, 2048, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv5_2_1x1_increase_bn = nn.BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv5_2_1x1_increase_bn = nn.BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv5_2_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv5_2_1x1_down = nn.Conv2d(2048, 128, kernel_size=[1, 1], stride=(1, 1))
         self.conv5_2_1x1_down_relu = nn.ReLU(inplace=True)
@@ -239,7 +258,8 @@ class Senet50_256(nn.Module):
         self.conv5_3_3x3_bn = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         self.conv5_3_3x3_relu = nn.ReLU(inplace=True)
         self.conv5_3_1x1_increase = nn.Conv2d(512, 2048, kernel_size=[1, 1], stride=(1, 1), bias=False)
-        self.conv5_3_1x1_increase_bn = nn.BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        self.conv5_3_1x1_increase_bn = nn.BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True,
+                                                      track_running_stats=True)
         self.conv5_3_global_pool = nn.AdaptiveAvgPool2d(output_size=1)
         self.conv5_3_1x1_down = nn.Conv2d(2048, 128, kernel_size=[1, 1], stride=(1, 1))
         self.conv5_3_1x1_down_relu = nn.ReLU(inplace=True)
@@ -270,7 +290,8 @@ class Senet50_256(nn.Module):
         conv2_1_prob_reshape = conv2_1_1x1_upx
         conv2_1_1x1_proj = self.conv2_1_1x1_proj(pool1_3x3_s2)
         conv2_1_1x1_proj_bn = self.conv2_1_1x1_proj_bn(conv2_1_1x1_proj)
-        conv2_1 = conv2_1_prob_reshape.expand_as(conv2_1_1x1_increase_bn) * conv2_1_1x1_increase_bn + conv2_1_1x1_proj_bn
+        conv2_1 = conv2_1_prob_reshape.expand_as(
+            conv2_1_1x1_increase_bn) * conv2_1_1x1_increase_bn + conv2_1_1x1_proj_bn
         conv2_1x = self.conv2_1_relu(conv2_1)
         conv2_2_1x1_reduce = self.conv2_2_1x1_reduce(conv2_1x)
         conv2_2_1x1_reduce_bn = self.conv2_2_1x1_reduce_bn(conv2_2_1x1_reduce)
@@ -320,7 +341,8 @@ class Senet50_256(nn.Module):
         conv3_1_prob_reshape = conv3_1_1x1_upx
         conv3_1_1x1_proj = self.conv3_1_1x1_proj(conv2_3x)
         conv3_1_1x1_proj_bn = self.conv3_1_1x1_proj_bn(conv3_1_1x1_proj)
-        conv3_1 = conv3_1_prob_reshape.expand_as(conv3_1_1x1_increase_bn) * conv3_1_1x1_increase_bn + conv3_1_1x1_proj_bn
+        conv3_1 = conv3_1_prob_reshape.expand_as(
+            conv3_1_1x1_increase_bn) * conv3_1_1x1_increase_bn + conv3_1_1x1_proj_bn
         conv3_1x = self.conv3_1_relu(conv3_1)
         conv3_2_1x1_reduce = self.conv3_2_1x1_reduce(conv3_1x)
         conv3_2_1x1_reduce_bn = self.conv3_2_1x1_reduce_bn(conv3_2_1x1_reduce)
@@ -386,7 +408,8 @@ class Senet50_256(nn.Module):
         conv4_1_prob_reshape = conv4_1_1x1_upx
         conv4_1_1x1_proj = self.conv4_1_1x1_proj(conv3_4x)
         conv4_1_1x1_proj_bn = self.conv4_1_1x1_proj_bn(conv4_1_1x1_proj)
-        conv4_1 = conv4_1_prob_reshape.expand_as(conv4_1_1x1_increase_bn) * conv4_1_1x1_increase_bn + conv4_1_1x1_proj_bn
+        conv4_1 = conv4_1_prob_reshape.expand_as(
+            conv4_1_1x1_increase_bn) * conv4_1_1x1_increase_bn + conv4_1_1x1_proj_bn
         conv4_1x = self.conv4_1_relu(conv4_1)
         conv4_2_1x1_reduce = self.conv4_2_1x1_reduce(conv4_1x)
         conv4_2_1x1_reduce_bn = self.conv4_2_1x1_reduce_bn(conv4_2_1x1_reduce)
@@ -484,7 +507,8 @@ class Senet50_256(nn.Module):
         conv5_1_prob_reshape = conv5_1_1x1_upx
         conv5_1_1x1_proj = self.conv5_1_1x1_proj(conv4_6x)
         conv5_1_1x1_proj_bn = self.conv5_1_1x1_proj_bn(conv5_1_1x1_proj)
-        conv5_1 = conv5_1_prob_reshape.expand_as(conv5_1_1x1_increase_bn) * conv5_1_1x1_increase_bn + conv5_1_1x1_proj_bn
+        conv5_1 = conv5_1_prob_reshape.expand_as(
+            conv5_1_1x1_increase_bn) * conv5_1_1x1_increase_bn + conv5_1_1x1_proj_bn
         conv5_1x = self.conv5_1_relu(conv5_1)
         conv5_2_1x1_reduce = self.conv5_2_1x1_reduce(conv5_1x)
         conv5_2_1x1_reduce_bn = self.conv5_2_1x1_reduce_bn(conv5_2_1x1_reduce)
@@ -522,6 +546,7 @@ class Senet50_256(nn.Module):
         feat_extract_preflatten = self.feat_extract(pool5_7x7_s1)
         feat_extract = feat_extract_preflatten.view(feat_extract_preflatten.size(0), -1)
         return feat_extract, feat_extract_preflatten
+
 
 def senet50_256(weights_path=None, **kwargs):
     """
