@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 import torch.nn as nn
 
 from outside.super_resolution import common
@@ -11,23 +13,40 @@ url = {
     'r32f256x4': 'https://cv.snu.ac.kr/research/EDSR/models/edsr_x4-4f62e9ef.pt'
 }
 
+# default configure for EDSR if not set
+default_cnf = {
+    'n_resblocks': 16,
+    'n_feats': 64,
+    'scale': 4,
+    'res_scale': 1,
+    'n_colors': 3,
+    'rgb_range': 255,
+}
+
 
 def make_model(args, parent=False):
     return EDSR(args)
 
 
 class EDSR(nn.Module):
-    def __init__(self, args, conv=common.default_conv):
+    def __init__(self, conv=common.default_conv, **config):
         super(EDSR, self).__init__()
+
+        # convert dict to object like
+        for k, v in default_cnf.items():
+            if config.get(k, None) is None:
+                config[k] = v
+
+        args = namedtuple("Args", config.keys())(*config.values())
 
         n_resblocks = args.n_resblocks
         n_feats = args.n_feats
         kernel_size = 3
-        scale = args.scale[0]
+        scale = args.scale  # [0]
         act = nn.ReLU(True)
         self.url = url['r{}f{}x{}'.format(n_resblocks, n_feats, scale)]
-        self.sub_mean = common.MeanShift(args.rgb_range)
-        self.add_mean = common.MeanShift(args.rgb_range, sign=1)
+        # self.sub_mean = common.MeanShift(args.rgb_range)
+        # self.add_mean = common.MeanShift(args.rgb_range, sign=1)
 
         # define head module
         m_head = [conv(args.n_colors, n_feats, kernel_size)]
@@ -51,14 +70,14 @@ class EDSR(nn.Module):
         self.tail = nn.Sequential(*m_tail)
 
     def forward(self, x):
-        x = self.sub_mean(x)
+        # x = self.sub_mean(x)
         x = self.head(x)
 
         res = self.body(x)
         res += x
 
         x = self.tail(res)
-        x = self.add_mean(x)
+        # x = self.add_mean(x)
 
         return x
 
