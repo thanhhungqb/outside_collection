@@ -34,7 +34,10 @@ class SRNet(nn.Module):
 
 
 class SRNet3(SRNet):
-    def __init__(self, upscale_factor):
+    def __init__(self, upscale_factor=None, **config):
+        if upscale_factor is None:
+            upscale_factor = config.get('scale', config.get('xn', 2))
+
         super(SRNet3, self).__init__(upscale_factor)
 
     def forward(self, x):
