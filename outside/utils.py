@@ -43,9 +43,9 @@ def find_modules(paths):
     if not isinstance(paths, str):
         """ case list of str"""
         for path in paths:
-            modules.union(find_modules(path))
+            modules = modules.union(find_modules(path))
         return modules
-    
+
     path = paths
     for pkg in find_packages(path):
         modules.add(pkg)
