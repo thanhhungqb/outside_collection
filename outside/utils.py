@@ -37,9 +37,16 @@ def resize2d(img, size):
     return (adaptive_avg_pool2d(img, size)).data
 
 
-def find_modules(path):
+def find_modules(paths):
     """ credit: https://stackoverflow.com/questions/48879353/how-do-you-recursively-get-all-submodules-in-a-python-package"""
     modules = set()
+    if not isinstance(paths, str):
+        """ case list of str"""
+        for path in paths:
+            modules.union(find_modules(path))
+        return modules
+    
+    path = paths
     for pkg in find_packages(path):
         modules.add(pkg)
         pkgpath = path + '/' + pkg.replace('.', '/')
