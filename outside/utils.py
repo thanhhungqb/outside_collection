@@ -1,5 +1,9 @@
+import sys
+from pkgutil import iter_modules
+
 import torch
 import torchvision
+from setuptools import find_packages
 from torch.nn.functional import adaptive_avg_pool2d
 from torchvision import transforms
 
@@ -31,3 +35,20 @@ def resize_tensor(input_tensors, h, w):
 
 def resize2d(img, size):
     return (adaptive_avg_pool2d(img, size)).data
+
+
+def find_modules(path):
+    """ credit: https://stackoverflow.com/questions/48879353/how-do-you-recursively-get-all-submodules-in-a-python-package"""
+    modules = set()
+    for pkg in find_packages(path):
+        modules.add(pkg)
+        pkgpath = path + '/' + pkg.replace('.', '/')
+        if sys.version_info.major == 2 or (sys.version_info.major == 3 and sys.version_info.minor < 6):
+            for _, name, ispkg in iter_modules([pkgpath]):
+                if not ispkg:
+                    modules.add(pkg + '.' + name)
+        else:
+            for info in iter_modules([pkgpath]):
+                if not info.ispkg:
+                    modules.add(pkg + '.' + info.name)
+    return modules
